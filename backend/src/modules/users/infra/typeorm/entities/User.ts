@@ -2,11 +2,13 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
+  OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-
 import { Exclude } from 'class-transformer';
+
+import Favorite from '@modules/favorites/infra/typeorm/entities/Favorite';
 
 @Entity('users')
 class User {
@@ -19,6 +21,10 @@ class User {
   @Column()
   @Exclude()
   password: string;
+
+  // one user have many favorites
+  @OneToMany(() => Favorite, favorit => favorit.user, { eager: true })
+  favorites: Favorite[];
 
   @CreateDateColumn()
   created_at: Date;
