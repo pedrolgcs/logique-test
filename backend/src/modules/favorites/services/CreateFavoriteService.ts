@@ -1,12 +1,11 @@
 import { injectable, inject } from 'tsyringe';
 import { isWebUri } from 'valid-url';
+import { tiny } from 'tiny-shortener';
 
 import AppError from '@shared/errors/AppError';
 
 // entities
 import Favorite from '@modules/favorites/infra/typeorm/entities/Favorite';
-
-// providers
 
 // repository
 import IFavoritesRepository from '../repositories/IFavoritesRepository';
@@ -29,11 +28,13 @@ class CreateFavoriteService {
       throw new AppError('Invalid URL');
     }
 
+    const url_shorted = await tiny(url);
+
     const favorite = await this.favoritesRepository.create({
       user_id,
       title,
       url,
-      url_shorted: 'url_encurtada',
+      url_shorted,
     });
 
     return favorite;
