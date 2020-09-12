@@ -16,6 +16,9 @@ class Favorite {
   id: string;
 
   @Column()
+  title: string;
+
+  @Column()
   url: string;
 
   @Column()

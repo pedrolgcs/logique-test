@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 // routes
 import usersRouter from '@modules/users/infra/http/routes/users.routes';
+import sessionsRouter from '@modules/users/infra/http/routes/sessions.routes';
 
 // create router
 const routes = Router();
@@ -12,5 +13,8 @@ routes.get('/', (request, response) => {
 
 // users
 routes.use('/users', usersRouter);
+
+// sessions
+routes.use('/sessions', sessionsRouter);
 
 export default routes;

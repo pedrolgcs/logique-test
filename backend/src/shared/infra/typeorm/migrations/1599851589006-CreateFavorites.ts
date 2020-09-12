@@ -20,6 +20,10 @@ export default class CreateFavorites1599851589006
             default: 'uuid_generate_v4()',
           },
           {
+            name: 'title',
+            type: 'varchar',
+          },
+          {
             name: 'url',
             type: 'varchar',
           },
