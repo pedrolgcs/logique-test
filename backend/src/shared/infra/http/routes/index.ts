@@ -10,7 +10,7 @@ import redirectRouter from '@modules/favorites/infra/http/routes/redirect.routes
 const routes = Router();
 
 routes.get('/', (request, response) => {
-  response.status(200).json({ message: 'Hello' });
+  response.status(200).json({ message: 'Hello from API' });
 });
 
 // users

@@ -2,6 +2,7 @@ import 'dotenv/config';
 import 'reflect-metadata';
 import 'express-async-errors';
 import express, { json, Request, Response, NextFunction } from 'express';
+import cors from 'cors';
 import { errors } from 'celebrate';
 
 import AppError from '@shared/errors/AppError';
@@ -17,6 +18,7 @@ import '@shared/container';
 const app = express();
 
 // middlewares
+app.use(cors());
 app.use(json());
 
 // apply routes
