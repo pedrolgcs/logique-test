@@ -22,8 +22,9 @@ class FavoritesRepository implements IFavoritesRepository {
     return favorite;
   }
 
-  public async find(): Promise<Favorite[]> {
+  public async findByUser(id: string): Promise<Favorite[]> {
     const favorites = await this.ormRepository.find({
+      where: { user_id: id },
       order: { title: 'ASC' },
     });
     return favorites;

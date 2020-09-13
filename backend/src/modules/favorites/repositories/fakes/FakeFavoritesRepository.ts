@@ -19,7 +19,7 @@ class FakeFavoritesRepository implements IFavoritesRepository {
     return favorite;
   }
 
-  public async find(): Promise<Favorite[]> {
+  public async findByUser(): Promise<Favorite[]> {
     return this.favorites;
   }
 

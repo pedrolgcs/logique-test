@@ -14,6 +14,8 @@ const favoritesControllers = new FavoritesControllers();
 favoriteRouter.use(auth);
 
 // routes
+favoriteRouter.get('/', favoritesControllers.index);
+
 favoriteRouter.post(
   '/',
   celebrate({
