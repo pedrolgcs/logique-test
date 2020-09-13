@@ -23,8 +23,8 @@ class FakeFavoritesRepository implements IFavoritesRepository {
     return this.favorites;
   }
 
-  public async findById(id: string): Promise<Favorite | undefined> {
-    const favorite = this.favorites.find(element => element.id === id);
+  public async findByUrlCode(id: string): Promise<Favorite | undefined> {
+    const favorite = this.favorites.find(element => element.url_code === id);
     return favorite;
   }
 }

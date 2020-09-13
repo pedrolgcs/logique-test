@@ -28,7 +28,11 @@ export default class CreateFavorites1599851589006
             type: 'varchar',
           },
           {
-            name: 'url_shorted',
+            name: 'short_url',
+            type: 'varchar',
+          },
+          {
+            name: 'url_code',
             type: 'varchar',
           },
           {

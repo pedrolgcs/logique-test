@@ -29,8 +29,10 @@ class FavoritesRepository implements IFavoritesRepository {
     return favorites;
   }
 
-  public async findById(id: string): Promise<Favorite | undefined> {
-    const favorite = await this.ormRepository.findOne(id);
+  public async findByUrlCode(id: string): Promise<Favorite | undefined> {
+    const favorite = await this.ormRepository.findOne({
+      where: { url_code: id },
+    });
     return favorite;
   }
 }

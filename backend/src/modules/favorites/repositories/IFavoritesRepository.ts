@@ -6,5 +6,5 @@ import ICreateFavoriteDTO from '../dtos/ICreateFavoriteDTO';
 export default interface IUsersRepository {
   create(data: ICreateFavoriteDTO): Promise<Favorite>;
   find(): Promise<Favorite[]>;
-  findById(id: string): Promise<Favorite | undefined>;
+  findByUrlCode(code: string): Promise<Favorite | undefined>;
 }

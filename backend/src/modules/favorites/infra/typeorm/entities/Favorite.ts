@@ -22,7 +22,10 @@ class Favorite {
   url: string;
 
   @Column()
-  url_shorted: string;
+  short_url: string;
+
+  @Column()
+  url_code: string;
 
   @Column()
   user_id: string;

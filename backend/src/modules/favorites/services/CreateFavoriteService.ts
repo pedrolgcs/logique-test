@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 import { isWebUri } from 'valid-url';
-import { tiny } from 'tiny-shortener';
+import { nanoid } from 'nanoid';
 
 import AppError from '@shared/errors/AppError';
 
@@ -28,13 +28,18 @@ class CreateFavoriteService {
       throw new AppError('Invalid URL');
     }
 
-    const url_shorted = await tiny(url);
+    const url_code = nanoid();
+    const short_url = `${process.env.APP_API_URL}/${url_code}`;
+
+    console.log(url_code);
+    console.log(short_url);
 
     const favorite = await this.favoritesRepository.create({
       user_id,
       title,
       url,
-      url_shorted,
+      short_url,
+      url_code,
     });
 
     return favorite;
