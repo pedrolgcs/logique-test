@@ -11,7 +11,7 @@ let fakeUsersRepository: FakeUsersRepository;
 let fakeFavoritesRepository: FakeFavoritesRepository;
 let createFavorite: CreateFavoriteService;
 
-describe('CreateUser', () => {
+describe('CreateFavorites', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeFavoritesRepository = new FakeFavoritesRepository();

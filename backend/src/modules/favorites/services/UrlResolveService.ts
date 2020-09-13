@@ -13,7 +13,7 @@ interface IRequest {
 }
 
 @injectable()
-class urlResolveService {
+class UrlResolveService {
   constructor(
     @inject('FavoritesRepository')
     private favoritesRepository: IFavoritesRepository,
@@ -30,4 +30,4 @@ class urlResolveService {
   }
 }
 
-export default urlResolveService;
+export default UrlResolveService;

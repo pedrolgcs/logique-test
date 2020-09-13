@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 // services
-import urlResolveService from '@modules/favorites/services/urlResolveService';
+import urlResolveService from '@modules/favorites/services/UrlResolveService';
 
 class RedirectController {
   public async show(request: Request, response: Response): Promise<void> {

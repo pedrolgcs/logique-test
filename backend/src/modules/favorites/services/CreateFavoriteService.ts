@@ -31,9 +31,6 @@ class CreateFavoriteService {
     const url_code = nanoid();
     const short_url = `${process.env.APP_API_URL}/${url_code}`;
 
-    console.log(url_code);
-    console.log(short_url);
-
     const favorite = await this.favoritesRepository.create({
       user_id,
       title,
