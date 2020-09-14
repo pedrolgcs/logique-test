@@ -1,54 +1,66 @@
-/* eslint-disable @typescript-eslint/ban-types */
-import React, { useCallback, useRef } from 'react';
-import { FiArrowLeft, FiMail, FiLock } from 'react-icons/fi';
-import { Form } from '@unform/web';
+import React, { useState, FormEvent } from 'react';
+import { FiArrowLeft } from 'react-icons/fi';
 import * as Yup from 'yup';
 
 // styles
-import { Container } from './styles';
+import { Container, Error } from './styles';
 
-// components
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+// service
+import api from '../../services/api';
 
 const SignUp: React.FC = () => {
-  const formRef = useRef(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = useCallback(async (data: object) => {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const schema = Yup.object().shape({
+      email: Yup.string()
+        .email('Digite um e-mail valido')
+        .required('E-mail obrigatório'),
+      password: Yup.string().min(6, 'Mínimo de 6 dígitos'),
+    });
+
     try {
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .email('digite um e-mail válido')
-          .required('e-mail obrigatório'),
-        password: Yup.string().required('senha obrigatória'),
-      });
+      await schema.validate({ email, password });
 
-      await schema.validate(data, { abortEarly: false });
-    } catch (err) {
-      console.log(err);
+      api.post('/users', { email, password });
+    } catch {
+      setError('Error, verifiqe seus dados');
+      return;
     }
-  }, []);
+    setError('');
+  }
 
   return (
     <Container>
-      <Form ref={formRef} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <h1>Faça seu cadastro</h1>
 
-        <Input name="email" icon={FiMail} placeholder="E-mail" />
+        <input
+          name="email"
+          placeholder="E-mail"
+          onChange={e => setEmail(e.target.value)}
+        />
 
-        <Input
+        <input
           name="password"
-          icon={FiLock}
           type="password"
           placeholder="Senha"
+          onChange={e => setPassword(e.target.value)}
         />
-        <Button type="submit">Cadastrar</Button>
+
+        <button type="submit">Cadastrar</button>
+
+        {error && <Error>{error}</Error>}
 
         <a href="create">
           <FiArrowLeft />
           Voltar para logon
         </a>
-      </Form>
+      </form>
     </Container>
   );
 };
