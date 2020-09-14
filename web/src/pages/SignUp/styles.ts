@@ -18,10 +18,10 @@ export const Container = styled.div`
     }
 
     input {
-      background: #f8f7f9;
-      color: #255957;
+      background: #f8f8f2;
+      color: #6272a4;
       border-radius: 1rem;
-      border: 2px solid #f8f7f9;
+      border: 2px solid #f8f8f2;
       padding: 1.6rem;
       width: 100%;
 
@@ -31,32 +31,32 @@ export const Container = styled.div`
     }
 
     button {
-      background: #a98743;
+      background: #6272a4;
       height: 56px;
       border-radius: 1rem;
       border: 0;
       padding: 0 1.6rem;
       width: 100%;
-      color: #eeebd3;
+      color: #f8f8f2;
       font-weight: 500;
       margin-top: 1.6rem;
       transition: background-color 0.5s;
 
       &:hover {
-        background: ${shade(0.1, '#A98743')};
+        background: ${shade(0.1, '#6272a4')};
       }
     }
   }
 
   a {
-    color: #255957;
+    color: #f1fa8c;
     display: block;
     margin-top: 2rem;
     text-decoration: none;
     transition: color 0.5s;
 
     &:hover {
-      color: ${shade(0.1, '#255957')};
+      color: ${shade(0.1, '#f1fa8c')};
     }
 
     svg {
@@ -67,11 +67,4 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
   }
-`;
-
-export const Error = styled.span`
-  display: block;
-  color: #ab2346;
-  margin-top: 1.5rem;
-  font-size: 1.8rem;
 `;

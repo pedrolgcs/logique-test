@@ -1,9 +1,10 @@
 import React, { useState, FormEvent } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 // styles
-import { Container, Error } from './styles';
+import { Container } from './styles';
 
 // service
 import api from '../../services/api';
@@ -11,7 +12,6 @@ import api from '../../services/api';
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -20,18 +20,15 @@ const SignUp: React.FC = () => {
       email: Yup.string()
         .email('Digite um e-mail valido')
         .required('E-mail obrigatório'),
-      password: Yup.string().min(6, 'Mínimo de 6 dígitos'),
+      password: Yup.string().required('Senha obrigatória'),
     });
 
     try {
-      await schema.validate({ email, password });
-
+      await schema.validate({ email, password }, { abortEarly: false });
       api.post('/users', { email, password });
-    } catch {
-      setError('Error, verifiqe seus dados');
-      return;
+    } catch (err) {
+      toast.error('Error, virifique seus dados!');
     }
-    setError('');
   }
 
   return (
@@ -53,8 +50,6 @@ const SignUp: React.FC = () => {
         />
 
         <button type="submit">Cadastrar</button>
-
-        {error && <Error>{error}</Error>}
 
         <a href="create">
           <FiArrowLeft />

@@ -1,4 +1,6 @@
 import React from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 // styles
 import GlobalStyle from './styles/global';
@@ -11,6 +13,7 @@ const App: React.FC = () => {
   return (
     <>
       <GlobalStyle />
+      <ToastContainer autoClose={3000} />
       <SignUp />
     </>
   );
