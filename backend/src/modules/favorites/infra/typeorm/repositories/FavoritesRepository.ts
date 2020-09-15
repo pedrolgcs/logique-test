@@ -22,6 +22,15 @@ class FavoritesRepository implements IFavoritesRepository {
     return favorite;
   }
 
+  public async deleteById(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
+  }
+
+  public async findById(id: string): Promise<Favorite> {
+    const favorites = await this.ormRepository.findOne(id);
+    return favorites;
+  }
+
   public async findByUser(id: string): Promise<Favorite[]> {
     const favorites = await this.ormRepository.find({
       where: { user_id: id },

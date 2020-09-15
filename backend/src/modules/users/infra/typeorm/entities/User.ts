@@ -23,7 +23,7 @@ class User {
   password: string;
 
   // one user have many favorites
-  @OneToMany(() => Favorite, favorit => favorit.user, { eager: true })
+  @OneToMany(() => Favorite, favorit => favorit.user)
   favorites: Favorite[];
 
   @CreateDateColumn()

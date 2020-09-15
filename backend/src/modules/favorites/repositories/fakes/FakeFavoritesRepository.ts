@@ -19,6 +19,16 @@ class FakeFavoritesRepository implements IFavoritesRepository {
     return favorite;
   }
 
+  public async deleteById(id: string): Promise<void> {
+    const findIndex = this.favorites.findIndex(favorit => favorit.id === id);
+    this.favorites.splice(findIndex, 1);
+  }
+
+  public async findById(id: string): Promise<Favorite> {
+    const favorite = this.favorites.find(element => element.id === id);
+    return favorite;
+  }
+
   public async findByUser(): Promise<Favorite[]> {
     return this.favorites;
   }
