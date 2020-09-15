@@ -16,6 +16,8 @@ Projeto desenvolvido para processo seletivo da logique
 
 ## Backend
 
+- Crie um arquivo **.env** seguindo o padrão do **.env.example** e insira uma chave secreta para geração de tokens
+
 - Execute o comando **yarn** ou **npm**, então abra o arquivo **ormconfig.json** e atualize com as credenciais de acesso do seu BD.
 
 ```json
