@@ -1,11 +1,15 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import React, { createContext, useContext, useCallback, useState } from 'react';
 
 import api from '../services/api';
 
+interface User {
+  id: string;
+  email: string;
+}
+
 interface AuthState {
   token: string;
-  user: object;
+  user: User;
 }
 
 interface SignInCredentials {
@@ -15,7 +19,7 @@ interface SignInCredentials {
 
 // return interface methods
 interface AuthContextData {
-  user: object;
+  user: User;
   token: string;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
@@ -31,6 +35,8 @@ const AuthProvider: React.FC = ({ children }) => {
     const user = localStorage.getItem('@logique:user');
 
     if (token && user) {
+      api.defaults.headers.authorization = `Bearer ${token}`;
+
       return { token, user: JSON.parse(user) };
     }
 
@@ -44,6 +50,8 @@ const AuthProvider: React.FC = ({ children }) => {
 
     localStorage.setItem('@logique:token', token);
     localStorage.setItem('@logique:user', JSON.stringify(user));
+
+    api.defaults.headers.authorization = `Bearer ${token}`;
 
     setData({ token, user });
   }, []);

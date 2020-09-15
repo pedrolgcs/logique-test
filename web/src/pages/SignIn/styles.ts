@@ -29,6 +29,16 @@ export const Container = styled.div`
       margin-bottom: 1rem;
     }
 
+    div {
+      & + div {
+        margin-top: 8px;
+      }
+    }
+
+    button {
+      margin-top: 1rem;
+    }
+
     a {
       color: #bd93f9;
       display: block;
