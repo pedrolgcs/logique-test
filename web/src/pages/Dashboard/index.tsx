@@ -3,6 +3,7 @@ import { FiPower, FiFileText, FiLink, FiDelete } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
+import { format } from 'date-fns';
 import { toast } from 'react-toastify';
 
 // utils
@@ -65,7 +66,7 @@ const Dashboard: React.FC = () => {
 
         setFavorites([...favorites, response.data]);
 
-        toast.info('url salvo!');
+        toast.info('URL salvo com sucesso');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErros(err);
@@ -73,6 +74,20 @@ const Dashboard: React.FC = () => {
           return;
         }
         toast.error('error ao salvar url');
+      }
+    },
+    [favorites],
+  );
+
+  const handleDelete = useCallback(
+    async id => {
+      try {
+        await api.delete(`/favorites/${id}`);
+
+        const data = favorites.filter(favorite => favorite.id !== id);
+        setFavorites(data);
+      } catch (error) {
+        toast.error('error ao remover url');
       }
     },
     [favorites],
@@ -106,15 +121,15 @@ const Dashboard: React.FC = () => {
       </Content>
 
       {favorites &&
-        favorites.map(favorit => (
-          <Card key={favorit.id}>
+        favorites.map(favorite => (
+          <Card key={favorite.id}>
             <div>
-              <h2>{favorit.title}</h2>
-              <p>{favorit.url}</p>
-              <p>{favorit.short_url}</p>
-              <time>{favorit.created_at}</time>
+              <h2>{favorite.title}</h2>
+              <p>{favorite.url}</p>
+              <p>{favorite.short_url}</p>
+              <time>{format(new Date(favorite.created_at), 'dd/mm/yyyy')}</time>
             </div>
-            <button type="button">
+            <button type="button" onClick={() => handleDelete(favorite.id)}>
               <FiDelete />
             </button>
           </Card>

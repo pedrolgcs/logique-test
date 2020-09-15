@@ -61,9 +61,7 @@ export const Content = styled.div`
     align-items: center;
 
     div {
-      width: 30%;
       & + div {
-        width: 100%;
         margin-left: 10px;
       }
     }
@@ -115,11 +113,13 @@ export const Card = styled.div`
 
       & + p {
         color: #50fa7b;
+        margin-bottom: 5px;
       }
     }
 
     time {
       color: #ff79c6;
+      font-size: 1rem;
     }
   }
 
